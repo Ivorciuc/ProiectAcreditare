@@ -6,6 +6,38 @@ import net.serenitybdd.core.pages.WebElementFacade;
 
 public class ProductPage extends PageObject {
 
+    @FindBy(id = "quantity_5f2cfa469277a")
+    private WebElementFacade productQuantity;
 
+    @FindBy(css = ".single_add_to_cart_button")
+    private WebElementFacade addToCartButton;
 
+    @FindBy(css = ".woocommerce-message")
+    private WebElementFacade addedToCartMessage;
+
+    @FindBy(className = "wc-forward")
+    private WebElementFacade viewCartButton;
+
+    @FindBy(id = "tab-title-reviews")
+    private WebElementFacade reviewsOption;
+
+    public void setProductQuantity(){
+        typeInto(productQuantity, "1");
+    }
+
+    public void clickAddToCart(){
+        clickOn(addToCartButton);
+    }
+
+    public boolean checkAddedToCartMessage(){
+        return addedToCartMessage.containsElements("has been added to your cart.");
+    }
+
+    public void clickViewCartButton(){
+        clickOn(viewCartButton);
+    }
+
+    public void checkReviews(){
+        clickOn(reviewsOption);
+    }
 }
