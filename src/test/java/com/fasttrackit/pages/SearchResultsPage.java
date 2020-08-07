@@ -42,14 +42,8 @@ public class SearchResultsPage extends PageObject {
            return checkIfProductAppeared.containsOnlyText(productName);
     }
 
-    public boolean checkNothingFoundMessage(){
-        try {
-        return nothingFoundMessage.isDisplayed();
-    } catch ( NoSuchElementException error ) {
-        System.out.println("Element has not been found");
-    }
-        return true;
-
+    public boolean checkNothingFoundMessage(String message){
+        return nothingFoundMessage.containsText(message);
 }
 
 

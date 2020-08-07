@@ -4,6 +4,7 @@ package com.fasttrackit.features;
 import com.fasttrackit.steps.ForgotPasswordSteps;
 import com.fasttrackit.steps.HomeSteps;
 import com.fasttrackit.steps.LoginSteps;
+import com.fasttrackit.steps.MyAccountSteps;
 import com.fasttrackit.util.BaseTest;
 import com.fasttrackit.util.Constants;
 import io.vavr.collection.List;
@@ -22,6 +23,9 @@ public class LoginTest extends BaseTest {
     @Steps
     private ForgotPasswordSteps forgotPasswordSteps;
 
+    @Steps
+    private MyAccountSteps myAccountSteps;
+
 
     @Test
     public void navigateToLogin(){
@@ -31,37 +35,37 @@ public class LoginTest extends BaseTest {
     @Test
     public void validLoginTest(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
-
+        loginSteps.checkIfYouAreLoggedIn("Hello aadriaan2");
     }
 
     @Test
     public void invalidEmailTest(){
         loginSteps.login("aadriaan2@yahoocom", Constants.USER_PASS);
-        loginSteps.verifyNotLoggedIn();
+        loginSteps.checkIfYouAreNotLoggedIn();
     }
 
     @Test
     public void invalidPassLoginTest(){
         loginSteps.login(Constants.USER_EMAIL, "123123");
-        loginSteps.verifyNotLoggedIn();
+        loginSteps.checkIfYouAreNotLoggedIn();
     }
 
     @Test
     public void emptyPasswrodTest(){
         loginSteps.login(Constants.USER_EMAIL, "");
-        loginSteps.verifyNotLoggedIn();
+        loginSteps.checkIfYouAreNotLoggedIn();
     }
 
     @Test
     public void emptyUserEmailTest(){
         loginSteps.login("", Constants.USER_PASS);
-        loginSteps.verifyNotLoggedIn();
+        loginSteps.checkIfYouAreNotLoggedIn();
     }
 
     @Test
     public void emptyUserEmailAndPasswordTest(){
         loginSteps.login("", "");
-        loginSteps.verifyNotLoggedIn();
+        loginSteps.checkIfYouAreNotLoggedIn();
     }
 
     @Test
@@ -74,6 +78,14 @@ public class LoginTest extends BaseTest {
     public void invalidEmailForForgotPass(){
         loginSteps.navigateToLoginPage();
         forgotPasswordSteps.invalidForgotPass("aadriaan22@yahoo.com");
+    }
+
+    @Test
+    public void logoutTest(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        loginSteps.checkIfYouAreLoggedIn("Hello aadriaan2");
+        loginSteps.logout();
+        loginSteps.checkIfYouAreNotLoggedIn();
     }
 
     

@@ -38,8 +38,18 @@ public class LoginSteps {
     }
 
     @Step
-    public void verifyNotLoggedIn(){
+    public void checkIfYouAreNotLoggedIn(){
         Assert.assertTrue(myAccountPage.isOnLoginPage());
+    }
+
+    @Step
+    public void logout(){
+        myAccountPage.setLogout();
+    }
+
+    @Step
+    public void checkIfYouAreLoggedIn(String text){
+        Assert.assertTrue(myAccountPage.checkWelcomeMessage(text));
     }
 
 

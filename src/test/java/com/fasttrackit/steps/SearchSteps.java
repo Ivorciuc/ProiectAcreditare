@@ -3,6 +3,7 @@ package com.fasttrackit.steps;
 import com.fasttrackit.pages.HomePage;
 import com.fasttrackit.pages.SearchResultsPage;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -37,11 +38,11 @@ public class SearchSteps {
 
     @Step
     public void checkIfProductAppeared(String productName){
-        searchResultsPage.setCheckIfProductAppeared(productName);
+        Assert.assertTrue(searchResultsPage.setCheckIfProductAppeared(productName));
     }
 
     @Step
-    public void checkIfNothingFoundMessageAppeared(){
-        searchResultsPage.checkNothingFoundMessage();
+    public void checkIfNothingFoundMessageAppeared(String message){
+        Assert.assertTrue(searchResultsPage.checkNothingFoundMessage(message));
     }
 }
