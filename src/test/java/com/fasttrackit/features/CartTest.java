@@ -57,7 +57,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    public void checkIfPricesAreCorrect() throws InterruptedException {
+    public void checkIfPricesAreCorrect(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
         shopSteps.openShopPage();
         searchSteps.typeInSearchField("Shirt");
@@ -72,7 +72,35 @@ public class CartTest extends BaseTest {
         productPageSteps.goToCart();
         cartSteps.verifySubTotalPrice();
         cartSteps.verifyTotalPrice();
+    }
 
+    @Test
+    public void removeFromCartTest(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        shopSteps.openShopPage();
+        searchSteps.typeInSearchField("Shirt");
+        searchSteps.pressEnterToSearch();
+        searchSteps.selectTheProductYouWant("T-Shirt");
+        productPageSteps.productQuantity("1");
+        productPageSteps.addToCart("T-Shirt");
+        productPageSteps.goToCart();
+        cartSteps.removeFromCart();
+    }
+
+    @Test
+    public void updateCartTest(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        shopSteps.openShopPage();
+        searchSteps.typeInSearchField("Hoodie");
+        searchSteps.pressEnterToSearch();
+        searchSteps.selectTheProductYouWant("Hoodie with Pocket");
+        productPageSteps.productQuantity("1");
+        productPageSteps.addToCart("Hoodie with Pocket");
+        productPageSteps.goToCart();
+        cartSteps.editProductQuantity("3");
+        cartSteps.updateCart();
+        cartSteps.cartUpdateMessage("Cart updated.");
+        cartSteps.removeFromCart();
     }
 
 

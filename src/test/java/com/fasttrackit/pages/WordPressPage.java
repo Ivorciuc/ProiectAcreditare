@@ -4,6 +4,9 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.WebElement;
 
 
 @DefaultUrl("http://qa3.fasttrackit.org:8008/wp-login.php")
@@ -99,7 +102,7 @@ public class WordPressPage extends PageObject {
     }
 
     public void publishProduct(){
-        clickOn(publish);
+        
     }
 
     public boolean checkPublishedMessage(String text){

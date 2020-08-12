@@ -43,4 +43,29 @@ public class CartSteps {
         cartPage.goToCheckout();
     }
 
+    @Step
+    public void removeFromCart(){
+        cartPage.removeProductsFromCart();
+    }
+
+    @Step
+    public void removeMessage(String message){
+        Assert.assertTrue(cartPage.setSuccessRemoveMessage(message));
+    }
+
+    @Step
+    public void updateCart(){
+        cartPage.updateTheCart();
+    }
+
+    @Step
+    public void editProductQuantity(String quantity){
+        cartPage.prdctQuantity(quantity);
+    }
+
+    @Step
+    public void cartUpdateMessage(String message){
+        Assert.assertTrue(cartPage.cartUpdate(message));
+    }
+
 }

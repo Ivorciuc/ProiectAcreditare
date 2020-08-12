@@ -25,4 +25,11 @@ public class ProductPageSteps {
         productPage.clickViewCartButton();
     }
 
+    @Step
+    public void proceedToCheckOutFast(String value, String productName){
+        productQuantity(value);
+        addToCart(productName);
+        goToCart();
+    }
+
 }

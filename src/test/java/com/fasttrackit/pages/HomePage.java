@@ -24,6 +24,9 @@ public class HomePage extends PageObject {
     @FindBy(css = "#meta-2 li:nth-child(2)")
     private WebElementFacade logInToAdmin;
 
+    @FindBy(className = ".fa-shopping-cart")
+    private WebElementFacade cart;
+
     public void navigateToHomePage(){
         clickOn(toHomePage);
     }
@@ -42,6 +45,10 @@ public class HomePage extends PageObject {
 
     public void clickToAdminAcc(){
         clickOn(logInToAdmin);
+    }
+
+    public void goToCart (){
+        clickOn(cart);
     }
 
 

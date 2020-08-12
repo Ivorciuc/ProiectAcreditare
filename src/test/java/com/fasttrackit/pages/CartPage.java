@@ -4,9 +4,11 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class CartPage extends PageObject {
 
@@ -28,6 +30,18 @@ public class CartPage extends PageObject {
     @FindBy(css = ".wc-proceed-to-checkout .checkout-button")
     private WebElementFacade proceedToCheckout;
 
+    @FindBy(css = ".cart_item .product-remove")
+    private WebElementFacade removeOption;
+
+    @FindBy(className = ".woocommerce-message")
+    private WebElementFacade successRemoveMessage;
+
+    @FindBy(css = ".actions .button:nth-child(2)")
+    private WebElementFacade updateCartButton;
+
+    @FindBy(css = ".woocommerce-message")
+    private WebElementFacade cartUpdateMessage;
+
     public boolean productList(String productName){
         for (WebElementFacade product : productList){
             WebElement productWeb = product.findElement(By.cssSelector("woocommerce-cart-form__cart-item"));
@@ -45,6 +59,10 @@ public class CartPage extends PageObject {
 
     public boolean checkProductQuantity(String quantity){
         return productQuantity.containsText(quantity);
+    }
+
+    public void prdctQuantity(String quantity){
+        typeInto(productQuantity, quantity);
     }
 
     public int getPrices(){
@@ -80,6 +98,23 @@ public class CartPage extends PageObject {
 
     public void goToCheckout(){
         clickOn(proceedToCheckout);
+    }
+
+
+    public void removeProductsFromCart() {
+        clickOn(removeOption);
+    }
+
+    public boolean setSuccessRemoveMessage(String message){
+        return successRemoveMessage.containsText(message);
+    }
+
+    public void updateTheCart(){
+        clickOn(updateCartButton);
+    }
+
+    public boolean cartUpdate(String message){
+        return cartUpdateMessage.containsText(message);
     }
 
 

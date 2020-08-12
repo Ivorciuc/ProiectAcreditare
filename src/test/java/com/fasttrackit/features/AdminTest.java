@@ -16,7 +16,7 @@ public class AdminTest extends BaseTest {
     private AdminSteps adminSteps;
 
     @Test
-    public void createNewProductTest() throws InterruptedException {
+    public void createNewProductTest(){
         adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
         adminSteps.createProduct("JACKETR", "IT IS A SUPER JACKET!",  "10", "20");
         adminSteps.checkProductPublishing("Product published.");

@@ -28,7 +28,7 @@ public class AdminSteps {
     }
 
     @Step
-    public void createProduct(String product, String content, String price, String stock) throws InterruptedException {
+    public void createProduct(String product, String content, String price, String stock) {
         wordPressPage.clickOnProducts();
         wordPressPage.clickAddNewProduct();
         wordPressPage.setProductName(product);
@@ -48,7 +48,6 @@ public class AdminSteps {
     @Step
     public void deleteProduct(){
         wordPressPage.clickOnProducts();
-
     }
 
     @Step
