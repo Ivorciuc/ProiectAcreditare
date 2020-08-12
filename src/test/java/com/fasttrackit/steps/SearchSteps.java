@@ -2,11 +2,14 @@ package com.fasttrackit.steps;
 
 import com.fasttrackit.pages.HomePage;
 import com.fasttrackit.pages.SearchResultsPage;
+import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 
 public class SearchSteps {
 
@@ -25,15 +28,8 @@ public class SearchSteps {
     }
 
     @Step
-    public void pressEnterToSearch() throws AWTException {
-        Robot r = new Robot();
-        r.keyPress(KeyEvent.VK_ENTER);
-        r.keyRelease(KeyEvent.VK_ENTER);
-    }
-
-    @Step
-    public void clickonHoodie(){
-        searchResultsPage.hoodieg();
+    public void pressEnterToSearch() {
+        getDriver().findElement(By.cssSelector("#search-2 .search-field")).sendKeys(Keys.ENTER);
     }
 
     @Step
@@ -42,7 +38,12 @@ public class SearchSteps {
     }
 
     @Step
+    public void checkIfSomethingAppeared(String leaveAComment){
+        Assert.assertTrue(searchResultsPage.checkifSomethingAppearedWithEmptySearchBar(leaveAComment));
+    }
+
+    @Step
     public void checkIfNothingFoundMessageAppeared(String message){
-        Assert.assertTrue(searchResultsPage.checkNothingFoundMessage(message));
+        Assert.assertFalse(searchResultsPage.checkNothingFoundMessage(message));
     }
 }

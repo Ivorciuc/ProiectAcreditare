@@ -30,7 +30,7 @@ public class SearchTest extends BaseTest {
         shopSteps.openShopPage();
         searchSteps.typeInSearchField("");
         searchSteps.pressEnterToSearch();
-        searchSteps.checkIfNothingFoundMessageAppeared("Sorry, but nothing matched your search terms. Please try again with some different keywords.");
+        searchSteps.checkIfSomethingAppeared("Leave a comment");
     }
 
     @Test

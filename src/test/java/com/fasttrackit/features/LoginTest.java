@@ -1,10 +1,8 @@
 package com.fasttrackit.features;
 
 
-import com.fasttrackit.steps.ForgotPasswordSteps;
-import com.fasttrackit.steps.HomeSteps;
-import com.fasttrackit.steps.LoginSteps;
-import com.fasttrackit.steps.MyAccountSteps;
+import com.fasttrackit.pages.WordPressPage;
+import com.fasttrackit.steps.*;
 import com.fasttrackit.util.BaseTest;
 import com.fasttrackit.util.Constants;
 import io.vavr.collection.List;
@@ -26,6 +24,10 @@ public class LoginTest extends BaseTest {
     @Steps
     private MyAccountSteps myAccountSteps;
 
+    @Steps
+    private AdminSteps adminSteps;
+
+
 
     @Test
     public void navigateToLogin(){
@@ -36,6 +38,11 @@ public class LoginTest extends BaseTest {
     public void validLoginTest(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
         loginSteps.checkIfYouAreLoggedIn("Hello aadriaan2");
+    }
+
+    @Test
+    public void validLoginToAdminAccountTest(){
+        adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.fasttrackit.steps;
 import com.fasttrackit.pages.HomePage;
 import com.fasttrackit.pages.MyAccountPage;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 import org.yecht.Data;
 
@@ -22,9 +23,38 @@ public class MyAccountSteps {
     }
 
     @Step
-    public void changeBillingAddress(){
-        myAccountPage.clickOnAddresses();
+    public void changeBillingAddress(String firstName, String lastName ,String company, String streetAddress,
+                                     String city, String postCode, String phoneNumber, String email, String text){
 
+        myAccountPage.clickOnAddresses();
+        myAccountPage.clickOnEditBilling();
+        myAccountPage.setBillingFirstName(firstName);
+        myAccountPage.setBillingLastName(lastName);
+        myAccountPage.setBillingCompany(company);
+        myAccountPage.setBillingStreetAddress(streetAddress);
+        myAccountPage.setBillingCity(city);
+        myAccountPage.setBillingPostCode(postCode);
+        myAccountPage.setBillingPhone(phoneNumber);
+        myAccountPage.setBillingEmail(email);
+        myAccountPage.saveAddressButton();
+        Assert.assertTrue(myAccountPage.checkBillingSpecifications(text));
+
+    }
+
+    @Step
+    public void changeShippingAddress(String firstName, String lastName, String company, String streetAddress,
+                                      String city, String postCode, String text){
+
+        myAccountPage.clickOnAddresses();
+        myAccountPage.clickOnEditShipping();
+        myAccountPage.setShippingFirstName(firstName);
+        myAccountPage.setShippingLastName(lastName);
+        myAccountPage.setShippingCompany(company);
+        myAccountPage.setShippingStreetAddress(streetAddress);
+        myAccountPage.setShippingCity(city);
+        myAccountPage.setShippingPostCode(postCode);
+        myAccountPage.saveAddressButton();
+        Assert.assertTrue(myAccountPage.checkShippingSpecifications(text));
     }
 
 

@@ -6,7 +6,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 
 public class ProductPage extends PageObject {
 
-    @FindBy(id = "quantity_5f2cfa469277a")
+    @FindBy(css = ".quantity .qty")
     private WebElementFacade productQuantity;
 
     @FindBy(css = ".single_add_to_cart_button")
@@ -21,16 +21,16 @@ public class ProductPage extends PageObject {
     @FindBy(id = "tab-title-reviews")
     private WebElementFacade reviewsOption;
 
-    public void setProductQuantity(){
-        typeInto(productQuantity, "1");
+    public void setProductQuantity(String value){
+        typeInto(productQuantity, value);
     }
 
     public void clickAddToCart(){
         clickOn(addToCartButton);
     }
 
-    public boolean checkAddedToCartMessage(){
-        return addedToCartMessage.containsElements("has been added to your cart.");
+    public boolean checkAddedToCartMessage(String text){
+        return addedToCartMessage.containsText(text);
     }
 
     public void clickViewCartButton(){

@@ -17,7 +17,7 @@ public class HomeSteps {
     }
 
     public void clickSignIn(){
-        homePage.clickLogin();
+        homePage.clickLoginCustomerAcc();
     }
 
     public void clickAccount(){

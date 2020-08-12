@@ -23,5 +23,8 @@ public class CheckoutTest extends BaseTest {
     @Steps
     private CheckoutSteps checkoutSteps;
 
+    public void checkoutTest(){
+        cartSteps.proceedToCheckout();
 
+    }
 }

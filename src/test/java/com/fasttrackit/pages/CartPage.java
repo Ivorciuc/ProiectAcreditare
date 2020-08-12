@@ -13,6 +13,21 @@ public class CartPage extends PageObject {
     @FindBy(className = ".woocommerce-cart-form__contents")
     private List<WebElementFacade> productList;
 
+    @FindBy(css = ".qty")
+    private WebElementFacade productQuantity;
+
+    @FindBy(css = ".product-subtotal .woocommerce-Price-amount")
+    private List<WebElementFacade> prices;
+
+    @FindBy(css = ".cart-subtotal .woocommerce-Price-amount")
+    private WebElementFacade cartSubTotalPrice;
+
+    @FindBy(css = ".order-total .woocommerce-Price-amount")
+    private WebElementFacade cartTotalPrice;
+
+    @FindBy(css = ".wc-proceed-to-checkout .checkout-button")
+    private WebElementFacade proceedToCheckout;
+
     public boolean productList(String productName){
         for (WebElementFacade product : productList){
             WebElement productWeb = product.findElement(By.cssSelector("woocommerce-cart-form__cart-item"));
@@ -23,5 +38,49 @@ public class CartPage extends PageObject {
         }
         return false;
     }
+
+    public void setProductQuantity(String value){
+        typeInto(productQuantity, value);
+    }
+
+    public boolean checkProductQuantity(String quantity){
+        return productQuantity.containsText(quantity);
+    }
+
+    public int getPrices(){
+        int sum = 0;
+        for (WebElementFacade element : prices){
+            String productPriceText = element.getText().replace(" lei", "").replace(",", "");
+            int productPrice = Integer.valueOf(productPriceText);
+            sum+=productPrice;
+        }
+        return sum;
+    }
+
+
+    public boolean checkSubTotalPrice(){
+        String cartTotalExt = cartSubTotalPrice.getText().replace(" lei", "").replace(",", "");
+        int cartSubTotalInt = Integer.valueOf(cartTotalExt);
+        System.out.println("SubTotalIs: " + cartSubTotalInt);
+        if (cartSubTotalInt == getPrices()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkTotalPrice(){
+        String cartTotalExt = cartTotalPrice.getText().replace(" lei", "").replace(",", "");
+        int cartTotalInt = Integer.valueOf(cartTotalExt);
+        System.out.println("TotalIs: " + cartTotalInt);
+        if (cartTotalInt == getPrices()){
+            return true;
+        }
+        return false;
+    }
+
+    public void goToCheckout(){
+        clickOn(proceedToCheckout);
+    }
+
 
 }

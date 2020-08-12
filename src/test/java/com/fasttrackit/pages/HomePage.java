@@ -21,6 +21,9 @@ public class HomePage extends PageObject {
     @FindBy(css = "#search-2 .search-field")
     private WebElementFacade searchField;
 
+    @FindBy(css = "#meta-2 li:nth-child(2)")
+    private WebElementFacade logInToAdmin;
+
     public void navigateToHomePage(){
         clickOn(toHomePage);
     }
@@ -29,12 +32,16 @@ public class HomePage extends PageObject {
         clickOn(accountLink);
     }
 
-    public void clickLogin(){
+    public void clickLoginCustomerAcc(){
         clickOn(loginLink);
     }
 
     public void typeInSearchBar(String productName){
         typeInto(searchField, productName);
+    }
+
+    public void clickToAdminAcc(){
+        clickOn(logInToAdmin);
     }
 
 

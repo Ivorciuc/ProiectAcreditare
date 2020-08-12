@@ -30,14 +30,49 @@ public class CartTest extends BaseTest {
     private SearchSteps searchSteps;
 
     @Test
-    public void addToCart() throws AWTException {
+    public void addToCart(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
         shopSteps.openShopPage();
         searchSteps.typeInSearchField("Hoodie");
         searchSteps.pressEnterToSearch();
         searchSteps.selectTheProductYouWant("Hoodie with Pocket");
-        productPageSteps.addToCart();
+        productPageSteps.productQuantity("1");
+        productPageSteps.addToCart("Hoodie with Pocket");
         productPageSteps.goToCart();
         cartSteps.findProductInCart("Hoodie with Pocket");
+    }
+
+    @Test
+    public void changeQuantityInCart() {
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        shopSteps.openShopPage();
+        searchSteps.typeInSearchField("Hoodie");
+        searchSteps.pressEnterToSearch();
+        searchSteps.selectTheProductYouWant("Hoodie with Pocket");
+        productPageSteps.productQuantity("2");
+        productPageSteps.addToCart("Hoodie with Pocket");
+        productPageSteps.goToCart();
+        cartSteps.productQuantity("2", "1");
+
+    }
+
+    @Test
+    public void checkIfPricesAreCorrect() throws InterruptedException {
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        shopSteps.openShopPage();
+        searchSteps.typeInSearchField("Shirt");
+        searchSteps.pressEnterToSearch();
+        searchSteps.selectTheProductYouWant("T-Shirt");
+        productPageSteps.productQuantity("1");
+        productPageSteps.addToCart("T-Shirt");
+        searchSteps.typeInSearchField("Hoodie");
+        searchSteps.pressEnterToSearch();
+        searchSteps.selectTheProductYouWant("Hoodie with Zipper");
+        productPageSteps.addToCart("Hoodie with Zipper");
+        productPageSteps.goToCart();
+        cartSteps.verifySubTotalPrice();
+        cartSteps.verifyTotalPrice();
+
     }
 
 

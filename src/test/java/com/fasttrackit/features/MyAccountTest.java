@@ -39,6 +39,18 @@ public class MyAccountTest extends BaseTest {
         myAccountSteps.changePassword(Constants.USER_PASSWORDSPECIALCHARACTERS, Constants.USER_PASS, Constants.USER_PASS);
     }
 
+    @Test
+    public void changeBillingAddress(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        myAccountSteps.changeBillingAddress("Adrian", "Adriann", "Bood", "Caucaz",
+                "Moscova", "11111", "111222", "aadriaan2@yahoo.com", "Adrian Adriann");
+    }
 
+    @Test
+    public void changeShippingAddress(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        myAccountSteps.changeShippingAddress("Adrian", "Adrianul", "Bood",
+                "Caucaz", "Moscova", "11111", "Adrian Adrianul");
+    }
 
 }
