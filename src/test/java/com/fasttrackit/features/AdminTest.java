@@ -16,10 +16,17 @@ public class AdminTest extends BaseTest {
     private AdminSteps adminSteps;
 
     @Test
-    public void createNewProductTest(){
+    public void createNewProductTest() {
         adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
         adminSteps.createProduct("JACKETR", "IT IS A SUPER JACKET!",  "10", "20");
         adminSteps.checkProductPublishing("Product published.");
+        adminSteps.deleteProduct("JACKETR", "1 product moved to the Trash.");
+    }
 
+    @Test
+    public void checkIfTheProductIsOnSite(){
+        adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
+        adminSteps.createProduct("Carpet", "IS IS A SUPER CARPET", "10", "20");
+        adminSteps.checkProductPublishing("Product published.");
     }
 }

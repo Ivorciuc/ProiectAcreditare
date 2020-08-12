@@ -4,9 +4,12 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 
 @DefaultUrl("http://qa3.fasttrackit.org:8008/wp-login.php")
@@ -20,6 +23,9 @@ public class WordPressPage extends PageObject {
 
     @FindBy(id = "wp-submit")
     private WebElementFacade logInButton;
+
+    @FindBy(id = "#menu-posts")
+    private WebElementFacade posts;
 
     @FindBy(id = "menu-posts-product")
     private WebElementFacade productsCategory;
@@ -60,6 +66,15 @@ public class WordPressPage extends PageObject {
     @FindBy(id = "qt_content_strong")
     private WebElementFacade boldOption;
 
+    @FindBy(className = "row-title")
+    private List<WebElementFacade> productsAlreadyCreated;
+
+    @FindBy(css = "#delete-action a")
+    private WebElementFacade deleteProductButton;
+
+    @FindBy(id = "message")
+    private WebElementFacade movedToTrashMessage;
+
 
     public void typeUserEmail(String email){
         typeInto(userEmail, email);
@@ -73,7 +88,7 @@ public class WordPressPage extends PageObject {
         clickOn(logInButton);
     }
 
-    public void clickOnProducts(){
+    public void openProducts(){
         clickOn(productsCategory);
     }
 
@@ -102,7 +117,7 @@ public class WordPressPage extends PageObject {
     }
 
     public void publishProduct(){
-        
+        clickOn(publish);
     }
 
     public boolean checkPublishedMessage(String text){
@@ -123,6 +138,29 @@ public class WordPressPage extends PageObject {
 
     public void selectBoldText(){
         clickOn(boldOption);
+    }
+
+    public boolean selectFromProductsCreated(String productName){
+        for (WebElementFacade products: productsAlreadyCreated){
+            WebElement product = products.findElement(By.cssSelector(".column-name"));
+            if (product.getText().equals(productName)){
+                product.click();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setDeleteProductButton(){
+        clickOn(deleteProductButton);
+    }
+
+    public boolean setMovedToTrashMessage(String message){
+        return movedToTrashMessage.containsText(message);
+    }
+
+    public void openPosts(){
+        clickOn(posts);
     }
 
 
