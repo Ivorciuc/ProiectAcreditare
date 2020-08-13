@@ -29,8 +29,8 @@ public class HomeSteps {
     }
 
     @Step
-    public void goToCartOption(){
-        homePage.goToCart();
+    public void goToCart(){
+        homePage.goToCartOption();
     }
 
 

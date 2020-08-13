@@ -47,7 +47,7 @@ public class HomePage extends PageObject {
         clickOn(logInToAdmin);
     }
 
-    public void goToCart (){
+    public void goToCartOption (){
         clickOn(cart);
     }
 

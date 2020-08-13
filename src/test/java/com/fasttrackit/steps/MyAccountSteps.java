@@ -57,6 +57,11 @@ public class MyAccountSteps {
         Assert.assertTrue(myAccountPage.checkShippingSpecifications(text));
     }
 
+    @Step
+    public void invalidPassChangeWarning(String text){
+        Assert.assertTrue(myAccountPage.invalidNewPassMessage(text));
+    }
+
 
 
 }

@@ -108,6 +108,9 @@ public class MyAccountPage extends PageObject {
     @FindBy(css = ".u-column2  address")
     private WebElementFacade shippingSpecifications;
 
+    @FindBy(className = "woocommerce-error")
+    private WebElementFacade newPassDoNotMatch;
+
 
 
     public void setUserEmailField(String email){
@@ -233,6 +236,9 @@ public class MyAccountPage extends PageObject {
         return shippingSpecifications.containsText(text);
     }
 
+    public boolean invalidNewPassMessage(String text){
+        return newPassDoNotMatch.containsText(text);
+    }
 
 
 

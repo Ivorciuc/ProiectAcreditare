@@ -120,8 +120,6 @@ public class CheckoutPage extends PageObject {
     }
 
     public boolean checkPrices(){
-        System.out.println("Checkout price is: " + getTotalPriceCheckout());
-        System.out.println("Order price is: " + getTotalPriceOrder());
         if(getTotalPriceCheckout() == getTotalPriceOrder()){
             return true;
         }

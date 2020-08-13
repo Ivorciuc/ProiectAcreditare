@@ -18,13 +18,27 @@ public class MyAccountTest extends BaseTest {
     @Test
     public void changePassword(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
-        myAccountSteps.changePassword(Constants.USER_PASS, Constants.USER_PASS, Constants.USER_NEWPASS);
+        myAccountSteps.changePassword(Constants.USER_PASS, Constants.USER_NEWPASS, Constants.USER_NEWPASS);
     }
 
     @Test
     public void changePasswordBack(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_NEWPASS);
         myAccountSteps.changePassword(Constants.USER_NEWPASS, Constants.USER_PASS, Constants.USER_PASS);
+    }
+
+    @Test
+    public void invalidNewPasswordChange1(){ //New passwords do not match.
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        myAccountSteps.changePassword(Constants.USER_PASS, Constants.USER_PASS, Constants.USER_NEWPASS);
+        myAccountSteps.invalidPassChangeWarning("New passwords do not match.");
+    }
+
+    @Test
+    public void invalidNewPasswordChange2(){ //Your current password is incorrect.
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        myAccountSteps.changePassword("AdrianIvorciuc22", Constants.USER_NEWPASS, Constants.USER_NEWPASS);
+        myAccountSteps.invalidPassChangeWarning("Your current password is incorrect.");
     }
 
     @Test

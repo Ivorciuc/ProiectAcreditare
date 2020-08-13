@@ -28,12 +28,6 @@ public class LoginTest extends BaseTest {
     private AdminSteps adminSteps;
 
 
-
-    @Test
-    public void navigateToLogin(){
-        loginSteps.navigateToLoginPage();
-    }
-
     @Test
     public void validLoginTest(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);

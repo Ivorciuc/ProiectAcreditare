@@ -18,7 +18,7 @@ public class SearchTest extends BaseTest {
     ShopSteps shopSteps;
 
     @Test
-    public void checkIfSearchBarWorks() throws AWTException {
+    public void checkIfSearchBarWorks(){
         shopSteps.openShopPage();
         searchSteps.typeInSearchField("sunglasses");
         searchSteps.pressEnterToSearch();
@@ -26,7 +26,7 @@ public class SearchTest extends BaseTest {
     }
 
     @Test
-    public void emptySearchBarTest() throws AWTException {
+    public void emptySearchBarTest(){
         shopSteps.openShopPage();
         searchSteps.typeInSearchField("");
         searchSteps.pressEnterToSearch();
@@ -34,11 +34,11 @@ public class SearchTest extends BaseTest {
     }
 
     @Test
-    public void searchWithSpecialCharacter() throws AWTException {
+    public void searchWithSpecialCharacter(){
         shopSteps.openShopPage();
         searchSteps.typeInSearchField("`@#");
         searchSteps.pressEnterToSearch();
-        searchSteps.checkIfNothingFoundMessageAppeared("Sorry, but nothing matched your search terms. Please try again with some different keywords.");
+        searchSteps.checkIfNothingFoundMessageAppeared("Sorry, but nothing matched your search terms.");
 
     }
 

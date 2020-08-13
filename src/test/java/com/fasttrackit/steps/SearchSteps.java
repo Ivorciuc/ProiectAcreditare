@@ -44,6 +44,6 @@ public class SearchSteps {
 
     @Step
     public void checkIfNothingFoundMessageAppeared(String message){
-        Assert.assertFalse(searchResultsPage.checkNothingFoundMessage(message));
+        Assert.assertTrue(searchResultsPage.checkNothingFoundMessage(message));
     }
 }

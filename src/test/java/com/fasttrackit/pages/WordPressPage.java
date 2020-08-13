@@ -4,10 +4,8 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -23,9 +21,6 @@ public class WordPressPage extends PageObject {
 
     @FindBy(id = "wp-submit")
     private WebElementFacade logInButton;
-
-    @FindBy(id = "#menu-posts")
-    private WebElementFacade posts;
 
     @FindBy(id = "menu-posts-product")
     private WebElementFacade productsCategory;
@@ -63,9 +58,6 @@ public class WordPressPage extends PageObject {
     @FindBy(css = "#post-visibility-select .save-post-visibility")
     private WebElementFacade okButtonForVisibility;
 
-    @FindBy(id = "qt_content_strong")
-    private WebElementFacade boldOption;
-
     @FindBy(className = "row-title")
     private List<WebElementFacade> productsAlreadyCreated;
 
@@ -74,6 +66,40 @@ public class WordPressPage extends PageObject {
 
     @FindBy(id = "message")
     private WebElementFacade movedToTrashMessage;
+
+    @FindBy(id = "post-search-input")
+    private WebElementFacade searchBar;
+
+    @FindBy(id = "search-submit")
+    private WebElementFacade searchButton;
+
+    @FindBy(id = "wp-admin-bar-wp-logo")
+    private WebElementFacade wordHome;
+
+    @FindBy(id = "wp-admin-bar-archive")
+    private WebElementFacade viewProductsOnTheSite;
+
+    @FindBy(className = "column-comment")
+    private WebElementFacade reviewSection;
+
+    @FindBy(id = "no-comments")
+    private WebElementFacade noCommentsWarning;
+
+    @FindBy(id = "menu-comments")
+    private WebElementFacade openCommentsSection;
+
+    @FindBy(css = "#the-comment-list .column-comment")
+    private List<WebElementFacade> commentList;
+
+    @FindBy(className = ".check-column input[type='checkbox']")
+    private WebElementFacade checkColumn;
+
+    @FindBy(id = "bulk-action-selector-top")
+    private WebElementFacade bulkOption;
+
+    @FindBy(id = "doaction")
+    private WebElementFacade applyButton;
+
 
 
     public void typeUserEmail(String email){
@@ -136,15 +162,10 @@ public class WordPressPage extends PageObject {
         clickOn(okButtonForVisibility);
     }
 
-    public void selectBoldText(){
-        clickOn(boldOption);
-    }
-
     public boolean selectFromProductsCreated(String productName){
         for (WebElementFacade products: productsAlreadyCreated){
-            WebElement product = products.findElement(By.cssSelector(".column-name"));
-            if (product.getText().equals(productName)){
-                product.click();
+            if (products.getText().equals(productName)){
+                products.click();
                 return true;
             }
         }
@@ -159,9 +180,58 @@ public class WordPressPage extends PageObject {
         return movedToTrashMessage.containsText(message);
     }
 
-    public void openPosts(){
-        clickOn(posts);
+    public void typeInSearchBar(String text){
+        typeInto(searchBar, text);
     }
+
+    public void clickSearch(){
+        clickOn(searchButton);
+    }
+
+    public void openWordHome(){
+        clickOn(wordHome);
+    }
+
+    public void checkProductsOnTheWebSite(){
+        clickOn(viewProductsOnTheSite);
+    }
+
+    public void getProductPrice(){
+        regularPrice.getText();
+    }
+
+    public void approveReview(){
+        Actions action = new Actions(getDriver());
+        WebElement column = getDriver().findElement(By.cssSelector(".column-comment"));
+        action.moveToElement(column).moveToElement(getDriver().findElement(By.cssSelector(".approve"))).click().build().perform();
+    }
+
+    public void unapproveReview(){
+        Actions action = new Actions(getDriver());
+        WebElement column = getDriver().findElement(By.cssSelector(".column-comment"));
+        action.moveToElement(column).moveToElement(getDriver().findElement(By.cssSelector(".unapprove"))).click().build().perform();
+    }
+
+    public void deleteReview(){
+        Actions action = new Actions(getDriver());
+        WebElement column = getDriver().findElement(By.cssSelector(".column-comment"));
+        action.moveToElement(column).moveToElement(getDriver().findElement(By.cssSelector(".trash a"))).click().build().perform();
+
+    }
+
+    public boolean noCommentsMessage(){
+        return noCommentsWarning.isDisplayed();
+    }
+
+    public void openComments(){
+        clickOn(openCommentsSection);
+    }
+
+
+
+
+
+
 
 
 }

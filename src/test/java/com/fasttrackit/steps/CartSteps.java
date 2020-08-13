@@ -20,6 +20,16 @@ public class CartSteps {
     }
 
     @Step
+    public void checkIfCartIsEmpty(String message){
+        Assert.assertTrue(cartPage.emptyCartText(message));
+    }
+
+    @Step
+    public void checkProductQuantityInCart(String quantity){
+        Assert.assertTrue(cartPage.checkProductQuantity(quantity));
+    }
+
+    @Step
     public void productQuantity(String quantity, String value){
         try {
             Assert.assertTrue(cartPage.checkProductQuantity(quantity));
@@ -45,12 +55,12 @@ public class CartSteps {
 
     @Step
     public void removeFromCart(){
-        cartPage.removeProductsFromCart();
+        cartPage.removeProductFromCart();
     }
 
     @Step
-    public void removeMessage(String message){
-        Assert.assertTrue(cartPage.setSuccessRemoveMessage(message));
+    public void removeAllProductsFromCart(){
+        cartPage.deleteList();
     }
 
     @Step

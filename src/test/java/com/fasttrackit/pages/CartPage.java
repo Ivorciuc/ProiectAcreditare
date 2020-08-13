@@ -4,6 +4,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -30,8 +31,8 @@ public class CartPage extends PageObject {
     @FindBy(css = ".wc-proceed-to-checkout .checkout-button")
     private WebElementFacade proceedToCheckout;
 
-    @FindBy(css = ".cart_item .product-remove")
-    private WebElementFacade removeOption;
+    @FindBy(css = ".product-remove a")
+    private List<WebElementFacade> deleteProduct;
 
     @FindBy(className = ".woocommerce-message")
     private WebElementFacade successRemoveMessage;
@@ -41,6 +42,9 @@ public class CartPage extends PageObject {
 
     @FindBy(css = ".woocommerce-message")
     private WebElementFacade cartUpdateMessage;
+
+    @FindBy(css = ".woocommerce .cart-empty")
+    private WebElementFacade emptycartMessage;
 
     public boolean productList(String productName){
         for (WebElementFacade product : productList){
@@ -79,7 +83,6 @@ public class CartPage extends PageObject {
     public boolean checkSubTotalPrice(){
         String cartTotalExt = cartSubTotalPrice.getText().replace(" lei", "").replace(",", "");
         int cartSubTotalInt = Integer.valueOf(cartTotalExt);
-        System.out.println("SubTotalIs: " + cartSubTotalInt);
         if (cartSubTotalInt == getPrices()){
             return true;
         }
@@ -89,7 +92,6 @@ public class CartPage extends PageObject {
     public boolean checkTotalPrice(){
         String cartTotalExt = cartTotalPrice.getText().replace(" lei", "").replace(",", "");
         int cartTotalInt = Integer.valueOf(cartTotalExt);
-        System.out.println("TotalIs: " + cartTotalInt);
         if (cartTotalInt == getPrices()){
             return true;
         }
@@ -100,14 +102,25 @@ public class CartPage extends PageObject {
         clickOn(proceedToCheckout);
     }
 
-
-    public void removeProductsFromCart() {
-        clickOn(removeOption);
+    public boolean deleteList(){
+        for (WebElementFacade delete : deleteProduct){
+            if (delete.isDisplayed()){
+                delete.click();
+            }
+        }
+        return false;
     }
 
-    public boolean setSuccessRemoveMessage(String message){
-        return successRemoveMessage.containsText(message);
+    public void removeProductFromCart() {
+        try {
+            WebElement removeOption = getDriver().findElement(By.cssSelector(".cart_item .product-remove a"));
+            removeOption.click();
+        } catch ( StaleElementReferenceException error ){
+            WebElement removeOption = getDriver().findElement(By.cssSelector(".cart_item .product-remove a"));
+            waitFor(removeOption).click();
+        }
     }
+
 
     public void updateTheCart(){
         clickOn(updateCartButton);
@@ -116,6 +129,12 @@ public class CartPage extends PageObject {
     public boolean cartUpdate(String message){
         return cartUpdateMessage.containsText(message);
     }
+
+    public boolean emptyCartText(String message){
+        return emptycartMessage.containsText(message);
+    }
+
+
 
 
 }

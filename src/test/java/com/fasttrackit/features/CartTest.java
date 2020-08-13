@@ -40,6 +40,22 @@ public class CartTest extends BaseTest {
         productPageSteps.addToCart("Hoodie with Pocket");
         productPageSteps.goToCart();
         cartSteps.findProductInCart("Hoodie with Pocket");
+        cartSteps.removeFromCart();
+    }
+
+    @Test
+    public void removeFromCartTest(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        shopSteps.openShopPage();
+        searchSteps.typeInSearchField("Shirt");
+        searchSteps.pressEnterToSearch();
+        searchSteps.selectTheProductYouWant("T-Shirt");
+        productPageSteps.productQuantity("1");
+        productPageSteps.addToCart("T-Shirt");
+        productPageSteps.goToCart();
+        cartSteps.removeFromCart();
+        cartSteps.checkIfCartIsEmpty("Your cart is currently empty.");
+
     }
 
     @Test
@@ -52,7 +68,9 @@ public class CartTest extends BaseTest {
         productPageSteps.productQuantity("2");
         productPageSteps.addToCart("Hoodie with Pocket");
         productPageSteps.goToCart();
-        cartSteps.productQuantity("2", "1");
+        cartSteps.productQuantity("1", "3");
+        cartSteps.updateCart();
+        cartSteps.removeFromCart();
 
     }
 
@@ -72,20 +90,11 @@ public class CartTest extends BaseTest {
         productPageSteps.goToCart();
         cartSteps.verifySubTotalPrice();
         cartSteps.verifyTotalPrice();
+        cartSteps.removeFromCart();
+        cartSteps.removeFromCart();
+
     }
 
-    @Test
-    public void removeFromCartTest(){
-        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
-        shopSteps.openShopPage();
-        searchSteps.typeInSearchField("Shirt");
-        searchSteps.pressEnterToSearch();
-        searchSteps.selectTheProductYouWant("T-Shirt");
-        productPageSteps.productQuantity("1");
-        productPageSteps.addToCart("T-Shirt");
-        productPageSteps.goToCart();
-        cartSteps.removeFromCart();
-    }
 
     @Test
     public void updateCartTest(){
