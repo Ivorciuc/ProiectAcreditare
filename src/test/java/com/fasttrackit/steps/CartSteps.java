@@ -55,12 +55,7 @@ public class CartSteps {
 
     @Step
     public void removeFromCart(){
-        cartPage.removeProductFromCart();
-    }
-
-    @Step
-    public void removeAllProductsFromCart(){
-        cartPage.deleteList();
+        cartPage.removeProductFromCart1();
     }
 
     @Step

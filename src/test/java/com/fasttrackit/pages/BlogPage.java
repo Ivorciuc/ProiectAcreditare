@@ -14,7 +14,7 @@ import java.util.List;
 public class BlogPage extends PageObject {
 
     @FindBy(css = ".reply .comment-reply-link")
-    private WebElementFacade replyButtons;
+    private WebElementFacade replyButton;
 
     @FindBy(css = ".comment-content")
     private List<WebElementFacade> commentList;
@@ -32,6 +32,10 @@ public class BlogPage extends PageObject {
 
     public void clickSubmit(){
         clickOn(submitButton);
+    }
+
+    public void reply(){
+        clickOn(replyButton);
     }
 
 }

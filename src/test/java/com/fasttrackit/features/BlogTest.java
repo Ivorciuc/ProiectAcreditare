@@ -21,10 +21,24 @@ public class BlogTest extends BaseTest {
     private AdminSteps adminSteps;
 
     @Test
-    public void postACommentTest() {
+    public void postACommentLikeCustomerTest() {
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
         loginSteps.checkIfYouAreLoggedIn("Hello aadriaan2");
-        blogSteps.writeAComment("ce faci");
+        blogSteps.writeAComment("how are you?");
+    }
+
+    @Test
+    public void postACommentLikeAdmin(){
+        adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
+        blogSteps.navigateToBlogPage();
+        blogSteps.writeAComment("I'm the admin.");
+    }
+
+    @Test
+    public void postAReply(){
+        loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
+        loginSteps.checkIfYouAreLoggedIn("Hello aadriaan2");
+        blogSteps.writeAReply("This is a reply");
     }
 
 

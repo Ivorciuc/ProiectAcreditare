@@ -32,7 +32,7 @@ public class CartPage extends PageObject {
     private WebElementFacade proceedToCheckout;
 
     @FindBy(css = ".product-remove a")
-    private List<WebElementFacade> deleteProduct;
+    private WebElementFacade deleteProduct;
 
     @FindBy(className = ".woocommerce-message")
     private WebElementFacade successRemoveMessage;
@@ -102,15 +102,6 @@ public class CartPage extends PageObject {
         clickOn(proceedToCheckout);
     }
 
-    public boolean deleteList(){
-        for (WebElementFacade delete : deleteProduct){
-            if (delete.isDisplayed()){
-                delete.click();
-            }
-        }
-        return false;
-    }
-
     public void removeProductFromCart() {
         try {
             WebElement removeOption = getDriver().findElement(By.cssSelector(".cart_item .product-remove a"));
@@ -118,6 +109,15 @@ public class CartPage extends PageObject {
         } catch ( StaleElementReferenceException error ){
             WebElement removeOption = getDriver().findElement(By.cssSelector(".cart_item .product-remove a"));
             waitFor(removeOption).click();
+        }
+    }
+
+    public void removeProductFromCart1(){
+        try{
+            clickOn(deleteProduct);
+        } catch ( StaleElementReferenceException error ){
+            getDriver().navigate().refresh();
+            clickOn(deleteProduct);
         }
     }
 
