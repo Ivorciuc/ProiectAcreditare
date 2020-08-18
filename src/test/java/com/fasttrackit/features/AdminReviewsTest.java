@@ -3,11 +3,10 @@ package com.fasttrackit.features;
 import com.fasttrackit.steps.*;
 import com.fasttrackit.util.BaseTest;
 import com.fasttrackit.util.Constants;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
 
-public class AdminTest extends BaseTest {
+public class AdminReviewsTest extends BaseTest {
 
     @Steps
     private LoginSteps loginSteps;
@@ -26,32 +25,6 @@ public class AdminTest extends BaseTest {
 
 
     @Test
-    public void createNewProductTest() {
-        adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
-        adminSteps.createProduct("JACKETR", "IT IS A SUPER JACKET!",  "10", "20");
-        adminSteps.checkProductPublishing("Product published.");
-        adminSteps.deleteProduct("JACKETR", "1 product moved to the Trash.");
-    }
-
-    @Test
-    public void checkIfProductPublishedOnSiteCorrect(){
-        adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
-        adminSteps.createProduct("CARPET", "IS IS A SUPER CARPET", "10", "20");
-        adminSteps.checkProductPublishing("Product published.");
-        adminSteps.openWordHomePage();
-        adminSteps.openProductsPage();
-        adminSteps.clickViewProductsOnFastTrackIt();
-        searchSteps.typeInSearchField("CARPET");
-        searchSteps.pressEnterToSearch();
-        searchSteps.selectTheProductYouWant("CARPET");
-        productPageSteps.verifyProductName("CARPET");
-        productPageSteps.verifyProductPriceFromWord(10);
-        adminSteps.openWordHomePage();
-        adminSteps.deleteProduct("CARPET", "1 product moved to the Trash." );
-
-    }
-
-    @Test
     public void createProductAndWriteReview(){
         adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
         adminSteps.createProduct("Shirt Bear Logo", "TedyBear Shirt", "1", "200");
@@ -66,6 +39,7 @@ public class AdminTest extends BaseTest {
         adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
         adminSteps.deleteProduct("Shirt Bear Logo", "1 product moved to the Trash.");
     }
+
 
     @Test
     public void approveReviewCustomer() {
