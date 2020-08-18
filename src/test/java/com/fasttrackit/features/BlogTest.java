@@ -28,7 +28,7 @@ public class BlogTest extends BaseTest {
     }
 
     @Test
-    public void postACommentLikeAdmin(){
+    public void postACommentLikeAdminTest(){
         adminSteps.loginToAdminPage(Constants.USER_EMAIL_WORDPRESS, Constants.USER_PASS_WORDPRESS);
         blogSteps.navigateToBlogPage();
         blogSteps.writeAComment("I'm the admin.");
@@ -38,7 +38,7 @@ public class BlogTest extends BaseTest {
     public void postAReply(){
         loginSteps.login(Constants.USER_EMAIL, Constants.USER_PASS);
         loginSteps.checkIfYouAreLoggedIn("Hello aadriaan2");
-        blogSteps.writeAReply("This is a reply");
+        blogSteps.writeAReply("This is a reply!!");
     }
 
 

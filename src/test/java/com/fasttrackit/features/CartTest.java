@@ -40,7 +40,7 @@ public class CartTest extends BaseTest {
         productPageSteps.addToCart("Hoodie with Pocket");
         productPageSteps.goToCart();
         cartSteps.findProductInCart("Hoodie with Pocket");
-        cartSteps.removeFromCart();
+        cartSteps.removeFromCartStep();
     }
 
     @Test
@@ -53,7 +53,7 @@ public class CartTest extends BaseTest {
         productPageSteps.productQuantity("1");
         productPageSteps.addToCart("T-Shirt");
         productPageSteps.goToCart();
-        cartSteps.removeFromCart();
+        cartSteps.removeFromCartStep();
         cartSteps.checkIfCartIsEmpty("Your cart is currently empty.");
 
     }
@@ -90,8 +90,8 @@ public class CartTest extends BaseTest {
         productPageSteps.goToCart();
         cartSteps.verifySubTotalPrice();
         cartSteps.verifyTotalPrice();
-        cartSteps.removeFromCart();
-        cartSteps.removeFromCart();
+        cartSteps.removeFromCartStep();
+        cartSteps.removeFromCartStep();
 
     }
 
@@ -109,7 +109,7 @@ public class CartTest extends BaseTest {
         cartSteps.editProductQuantity("3");
         cartSteps.updateCart();
         cartSteps.cartUpdateMessage("Cart updated.");
-        cartSteps.removeFromCart();
+        cartSteps.removeFromCartStep();
     }
 
 

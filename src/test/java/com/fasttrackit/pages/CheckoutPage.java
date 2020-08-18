@@ -54,6 +54,9 @@ public class CheckoutPage extends PageObject {
     @FindBy(css = ".product-total .woocommerce-Price-amount")
     private WebElementFacade totalPriceOrder;
 
+    @FindBy(css = ".woocommerce-error li")
+    private WebElementFacade invalidErrorMessage;
+
     public void setFirstName(String text){
         typeInto(firstName, text);
     }
@@ -124,6 +127,10 @@ public class CheckoutPage extends PageObject {
             return true;
         }
         return false;
+    }
+
+    public boolean invalidError(String text){
+        return invalidErrorMessage.containsText(text);
     }
 
 

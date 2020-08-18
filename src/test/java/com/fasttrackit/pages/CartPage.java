@@ -102,21 +102,15 @@ public class CartPage extends PageObject {
         clickOn(proceedToCheckout);
     }
 
-    public void removeProductFromCart() {
-        try {
-            WebElement removeOption = getDriver().findElement(By.cssSelector(".cart_item .product-remove a"));
-            removeOption.click();
-        } catch ( StaleElementReferenceException error ){
-            WebElement removeOption = getDriver().findElement(By.cssSelector(".cart_item .product-remove a"));
-            waitFor(removeOption).click();
-        }
-    }
-
-    public void removeProductFromCart1(){
+    public void removeProductFromCart(){
         try{
             clickOn(deleteProduct);
         } catch ( StaleElementReferenceException error ){
             getDriver().navigate().refresh();
+            clickOn(deleteProduct);
+        } finally {
+            getDriver().navigate().refresh();
+            waitFor(deleteProduct);
             clickOn(deleteProduct);
         }
     }

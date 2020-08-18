@@ -1,6 +1,7 @@
 package com.fasttrackit.steps;
 
 import com.fasttrackit.pages.CartPage;
+import com.fasttrackit.pages.HomePage;
 import com.fasttrackit.pages.ProductPage;
 import com.fasttrackit.pages.SearchResultsPage;
 import net.thucydides.core.annotations.Step;
@@ -13,6 +14,7 @@ public class CartSteps {
     private ProductPage productPage;
     private CartPage cartPage;
     private SearchResultsPage searchResultsPage;
+    private HomePage homePage;
 
     @Step
     public void findProductInCart(String productName){
@@ -54,8 +56,14 @@ public class CartSteps {
     }
 
     @Step
+    public void removeFromCartStep(){
+        cartPage.removeProductFromCart();
+    }
+
+    @Step
     public void removeFromCart(){
-        cartPage.removeProductFromCart1();
+        cartPage.removeProductFromCart();
+        homePage.open();
     }
 
     @Step

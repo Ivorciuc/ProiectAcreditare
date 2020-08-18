@@ -52,5 +52,10 @@ public class CheckoutSteps {
         checkoutPage.checkPrices();
     }
 
+    @Step
+    public void invalidErrorMessageCheck(String text){
+        Assert.assertTrue(checkoutPage.invalidError(text));
+    }
+
 
 }
